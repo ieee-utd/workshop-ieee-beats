@@ -1,0 +1,178 @@
+<link rel="import" href="../lib/polymer/polymer-element.html">
+<link rel="import" href="../lib/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../lib/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../lib/app-layout/app-header/app-header.html">
+<link rel="import" href="../lib/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../lib/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../lib/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../lib/app-route/app-location.html">
+<link rel="import" href="../lib/app-route/app-route.html">
+<link rel="import" href="../lib/iron-a11y-keys/iron-a11y-keys.html">
+<link rel="import" href="../lib/iron-pages/iron-pages.html">
+<link rel="import" href="../lib/iron-selector/iron-selector.html">
+<link rel="import" href="../lib/paper-button/paper-button.html">
+<link rel="import" href="../lib/paper-card/paper-card.html">
+<link rel="import" href="../lib/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../lib/paper-ripple/paper-ripple.html">
+<link rel="import" href="../lib/paper-styles/paper-styles.html">
+<link rel="import" href="../lib/paper-slider/paper-slider.html">
+
+<link rel="import" href="mdi.html">
+<link rel="import" href="shared-styles.html">
+<link rel="import" href="app-container.html">
+
+<dom-module id="beats-app">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        --app-drawer-width: 500px;
+      }
+
+      app-drawer-layout {
+        --app-drawer-layout-content-transition: margin 0.2s;
+      }
+      app-drawer-layout:not([narrow]) [drawer-toggle] {
+        display: none;
+      }
+      app-header {
+        color: var(--color-primary);
+        background-color: white;
+        border-bottom: 2px solid var(--color-primary);
+      }
+      app-header paper-icon-button {
+        --paper-icon-button-ink-color: white;
+        margin-right: 6px;
+      }
+      app-drawer {
+        margin-top: 64px;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+        background-color: transparent;
+      }
+
+      .drawer-list {
+        margin: 0 20px;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+      }
+
+      .drawer-list a {
+        display: block;
+        padding: 8px 16px;
+        text-decoration: none;
+        color: black;
+        line-height: 40px;
+        transition: 0.4s background-color;
+      }
+      .drawer-list a:hover {
+        background-color: var(--paper-grey-100);
+      }
+      .drawer-list a.iron-selected {
+        color: var(--color-primary);
+        background-color: var(--paper-grey-100);
+      }
+      .drawer-list a iron-icon {
+        margin: 0 9px;
+      }
+      div.header-layout {
+        @apply --layout-horizontal;
+        @apply --layout-justified;
+      }
+      div.buttons {
+        @apply --layout-horizontal;
+        @apply --layout-end-justified;
+        @apply --layout-center;
+      }
+      div.buttons paper-button {
+        font-size: 14px;
+        @apply --layout-vertical;
+        @apply --layout-center-justified;
+        @apply --layout-center;
+        text-transform: none;
+      }
+      div[main-title] {
+        @apply --layout-horizontal;
+        @apply --layout-center;
+      }
+      div[main-title] img {
+        width: 48px;
+        height: 48px;
+        margin-right: 8px;
+      }
+
+      div.layout-main {
+        @apply --layout-fit;
+        top: 64px;
+        @apply --layout-vertical;
+      }
+      div.layout-main > .top {
+        @apply --layout-horizontal;
+        @apply --layout-flex;
+      }
+      div.layout-main > .top > .left {
+        @apply --layout-vertical;
+        @apply --layout-flex;
+      }
+      div.layout-main > .top > .right {
+        width: 500px;
+      }
+    </style>
+
+    <!-- <app-location route="{{route}}"></app-location>
+    <app-route
+        route="{{route}}"
+        pattern="[[rootPattern]]:page"
+        data="{{routeData}}"
+        tail="{{subroute}}"></app-route> -->
+
+    <app-header-layout fullbleed>
+
+      <app-header slot="header" condenses reveals effects="waterfall">
+        <app-toolbar>
+          <app-container>
+            <div class="header-layout">
+              <div main-title><img src="./images/logo.jpg"></img>IEEE Beatz</div>
+            </div>
+          </app-container>
+        </app-toolbar>
+      </app-header>
+
+      <div class="layout-main">
+
+      </div>
+
+    </app-header-layout>
+  </template>
+
+  <script>
+    class BeatsApp extends Polymer.Element {
+
+      static get is() { return 'beats-app'; }
+
+      static get properties() {
+        return {
+
+        };
+      }
+
+      static get observers() {
+        return [
+          '_routePageChanged(routeData.page)',
+        ];
+      }
+
+      constructor() {
+        super();
+
+        // Get root pattern for app-route, for more info about `rootPath` see:
+        // https://www.polymer-project.org/2.0/docs/upgrade#urls-in-templates
+        this.rootPattern = (new URL(this.rootPath)).pathname;
+      }
+
+      ready() {
+        super.ready();
+      }
+    }
+
+    window.customElements.define(BeatsApp.is, BeatsApp);
+  </script>
+</dom-module>

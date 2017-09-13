@@ -1,0 +1,20 @@
+<dom-module id="my-template">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+    </style>
+
+    content
+
+  </template>
+
+  <script>
+    class MyTemplate extends Polymer.Element {
+      static get is() { return 'my-template'; }
+    }
+
+    window.customElements.define(MyTemplate.is, MyTemplate);
+  </script>
+</dom-module>

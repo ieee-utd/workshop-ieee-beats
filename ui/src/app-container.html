@@ -1,0 +1,53 @@
+<dom-module id="app-container">
+  <template>
+    <style>
+      :host {
+        display: block;
+        width: 100%;
+        --app-container-padding: 0;
+        --app-container-content: { };
+      }
+      div.container {
+        width: 100%;
+        @apply --layout-horizontal;
+        @apply --layout-around-justified;
+        background-color: inherit;
+      }
+      div.container > div.content {
+        width: 100%;
+        @apply --app-container-content;
+        padding: 0 var(--app-container-padding);
+      }
+      @media (min-width: 768px) {
+        div.container > div.content {
+          width:750px;
+        }
+      }
+      @media (min-width: 992px) {
+        div.container > div.content {
+          width:970px;
+        }
+      }
+      @media (min-width: 1200px) {
+        div.container > div.content {
+          width:1170px;
+        }
+      }
+    </style>
+
+    <div class="container">
+      <div class="content">
+        <slot></slot>
+      </div>
+    </div>
+
+  </template>
+
+  <script>
+    class AppContainer extends Polymer.Element {
+      static get is() { return 'app-container'; }
+    }
+
+    window.customElements.define(AppContainer.is, AppContainer);
+  </script>
+</dom-module>
